@@ -17,4 +17,4 @@ git clone https://github.com/Ehco1996/aioshadowsocks.git
 cd aioshadowsocks
 systemctl restart docker
 sed -i 's/SS_API_ENDPOINT: \"\"/SS_API_ENDPOINT: '"$API"'/g' docker-compose.yml
-docker-compose up
+docker-compose up -d
