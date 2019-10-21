@@ -1,12 +1,9 @@
 #!/bin/bash
-
+Domain=nai-ve.com
+Token=admin
 APIinit(){
-echo "请输入域名"
-read Domain
 echo "请输入节点ID"
 read NodeId
-echo "请输入Token"
-read Token
 API="\"http:\/\/$Domain\/api\/user_ss_config\/$NodeId\/?token=$Token\""
 }
 APIinit
