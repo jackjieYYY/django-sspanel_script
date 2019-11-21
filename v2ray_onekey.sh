@@ -39,7 +39,6 @@ read A
 }
 centos_install(){
     APIinit
-    echo $API
     yum install -y curl git
     curl -sSL https://get.docker.com/ | sh
     curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -55,7 +54,6 @@ centos_install(){
 
 debian_install(){
     APIinit
-    echo $API
     apt install -y curl git
     curl -sSL https://get.docker.com/ | sh
     curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
