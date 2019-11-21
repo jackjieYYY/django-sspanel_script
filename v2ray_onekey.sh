@@ -52,7 +52,7 @@ install(){
     git clone https://github.com/Ehco1996/v2scar.git
     cd v2scar
     sed -i 's/V2SCAR_API_ENDPOINT: \"\"/V2SCAR_API_ENDPOINT: '"$API"'/g' docker-compose.yml
-    docker-compose up -d
+    docker-compose up -d -restart=always
     End
 }
 
