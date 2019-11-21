@@ -59,6 +59,7 @@ centos_install(){
     APIinit
     prepare_Centos
     Install
+    systemctl enable docker.service
 }
 
 debian_install(){
