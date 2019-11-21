@@ -2,7 +2,7 @@
 clear
 echo
 echo "#################################################################"
-echo "django-sspanel v2ray 一键后端"
+echo "django-sspanel V2ray 一键后端"
 echo
 echo "System Required: CentOS Debian"
 echo "#################################################################"
@@ -32,14 +32,18 @@ echo "按任意键开始安装"
 read A
 }
 
-End(){
-echo "安装完毕 请打开防火墙 10086 端口"
-echo "请按任意键退出脚本"
-read A
-}
-centos_install(){
-    APIinit
+prepare_Centos(){
     yum install -y curl git
+}
+prepare_Debian(){
+    apt install -y curl git
+}
+End(){
+    echo "安装完毕 请打开防火墙端口 (默认10086)"
+    echo "请按任意键退出脚本"
+    read A
+}
+install(){
     curl -sSL https://get.docker.com/ | sh
     curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
@@ -49,21 +53,22 @@ centos_install(){
     cd v2scar
     sed -i 's/V2SCAR_API_ENDPOINT: \"\"/V2SCAR_API_ENDPOINT: '"$API"'/g' docker-compose.yml
     docker-compose up -d
-	End
+    chkconfig docker on
+    End
+}
+
+centos_install(){
+    APIinit
+    prepare_Centos
+    install
 }
 
 debian_install(){
     APIinit
-    apt install -y curl git
-    curl -sSL https://get.docker.com/ | sh
-    curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-    chmod +x /usr/local/bin/docker-compose
-    sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-    systemctl restart docker
-    git clone https://github.com/Ehco1996/v2scar.git
-    cd v2scar
-    sed -i 's/V2SCAR_API_ENDPOINT: \"\"/V2SCAR_API_ENDPOINT: '"$API"'/g' docker-compose.yml
-    docker-compose up -d
-    End
+    prepare_Debian
+    install
 }
+
 system_check
+
+
