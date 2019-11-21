@@ -19,22 +19,27 @@ system_check(){
 }
 
 APIinit(){
-echo "请输入面板地址(Example:sspanel.com)"
-read Domain
-echo "请输入Token"
-read Token
-echo "请输入节点ID"
-read NodeId
-API="\"http:\/\/$Domain\/api\/user_ss_config\/$NodeId\/?token=$Token\""
-echo "API = http://$Domain/api/user_ss_config/$NodeId/?token=$Token"
-echo "按任意键开始安装"
-read A
+    echo "请输入面板地址(Example:sspanel.com)"
+    read Domain
+    echo "请输入Token"
+    read Token
+    echo "请输入节点ID"
+    read NodeId
+    API="\"http:\/\/$Domain\/api\/user_ss_config\/$NodeId\/?token=$Token\""
+    echo "API = http://$Domain/api/user_ss_config/$NodeId/?token=$Token"
+    echo "按任意键开始安装"
+    read A
 }
 prepare_Centos(){
     yum install -y curl git
 }
 prepare_Debian(){
     apt install -y curl git
+}
+End(){
+    echo "安装完毕 请打开防火墙 1000-2000 端口"
+    echo "请按任意键退出脚本"
+    read A
 }
 Install(){
     curl -sSL https://get.docker.com/ | sh
@@ -47,7 +52,9 @@ Install(){
     sed -i 's/SS_API_ENDPOINT: \"\"/SS_API_ENDPOINT: '"$API"'/g' docker-compose.yml
     docker-compose up -d
     chkconfig docker on
+    End
 }
+
 centos_install(){
     APIinit
     prepare_Centos
