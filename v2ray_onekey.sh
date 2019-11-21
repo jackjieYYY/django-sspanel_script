@@ -62,3 +62,4 @@ debian_install(){
     sed -i 's/V2SCAR_API_ENDPOINT: \"\"/V2SCAR_API_ENDPOINT: '"$API"'/g' docker-compose.yml
     docker-compose up
 }
+system_check
