@@ -1,21 +1,64 @@
 #!/bin/bash
-Domain=nai-ve.com
-Token=admin
+clear
+echo
+echo "#################################################################"
+echo "django-sspanel ss 一键后端"
+echo
+echo "System Required: CentOS Debian"
+echo "#################################################################"
+echo
+
+system_check(){
+	if [ -f /usr/bin/yum ]; then
+		centos_install
+	elif [ -f /usr/bin/apt ]; then
+		debian_install
+	else
+		echo -e "你的系统不支持"
+	fi
+}
+
 APIinit(){
+echo "请输入面板地址(Example:sspanel.com)"
+read Domain
+echo "请输入Token"
+read Token
 echo "请输入节点ID"
 read NodeId
 API="\"http:\/\/$Domain\/api\/user_ss_config\/$NodeId\/?token=$Token\""
+echo "API = http://$Domain/api/user_ss_config/$NodeId/?token=$Token"
+echo "按任意键开始安装"
+read A
 }
-APIinit
-echo $API
-yum install -y curl git
-curl -sSL https://get.docker.com/ | sh
-curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-git clone https://github.com/Ehco1996/aioshadowsocks.git
-cd aioshadowsocks
-systemctl restart docker
-sed -i 's/SS_API_ENDPOINT: \"\"/SS_API_ENDPOINT: '"$API"'/g' docker-compose.yml
-docker-compose up -d
-chkconfig docker on
+prepare_Centos(){
+    yum install -y curl git
+}
+prepare_Debian(){
+    apt install -y curl git
+}
+Install(){
+    curl -sSL https://get.docker.com/ | sh
+    curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+    sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    git clone https://github.com/Ehco1996/aioshadowsocks.git
+    cd aioshadowsocks
+    systemctl restart docker
+    sed -i 's/SS_API_ENDPOINT: \"\"/SS_API_ENDPOINT: '"$API"'/g' docker-compose.yml
+    docker-compose up -d
+    chkconfig docker on
+}
+centos_install(){
+    APIinit
+    prepare_Centos
+    Install
+}
+
+debian_install(){
+    APIinit
+    prepare_Debian
+    Install
+}
+system_check
+
+
