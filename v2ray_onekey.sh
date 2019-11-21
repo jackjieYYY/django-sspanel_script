@@ -2,7 +2,7 @@
 clear
 echo
 echo "#################################################################"
-echo "django-sspanel ss 一键后端"
+echo "django-sspanel v2ray 一键后端"
 echo
 echo "System Required: CentOS Debian"
 echo "#################################################################"
@@ -32,6 +32,11 @@ echo "按任意键开始安装"
 read A
 }
 
+End(){
+echo "安装完毕 请打开防火墙 10086 端口"
+echo "请按任意键退出脚本"
+read A
+}
 centos_install(){
     APIinit
     echo $API
@@ -45,7 +50,7 @@ centos_install(){
     cd v2scar
     sed -i 's/V2SCAR_API_ENDPOINT: \"\"/V2SCAR_API_ENDPOINT: '"$API"'/g' docker-compose.yml
     docker-compose up -d
-
+	End
 }
 
 debian_install(){
@@ -60,6 +65,7 @@ debian_install(){
     git clone https://github.com/Ehco1996/v2scar.git
     cd v2scar
     sed -i 's/V2SCAR_API_ENDPOINT: \"\"/V2SCAR_API_ENDPOINT: '"$API"'/g' docker-compose.yml
-    docker-compose up
+    docker-compose up -d
+    End
 }
 system_check
