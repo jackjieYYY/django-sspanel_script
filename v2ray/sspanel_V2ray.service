@@ -1,5 +1,5 @@
 [Unit]
-Description=sspanel_V2ray service
+Description=restart sspanel_V2ray service
 
 [Service]
 ExecStart=/bin/bash /root/v2scar/v2ray.sh restart
