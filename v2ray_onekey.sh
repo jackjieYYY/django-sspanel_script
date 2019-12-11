@@ -77,10 +77,10 @@ AutoRestart(){
     cd
     cd /etc/systemd/system
     wget -N --no-check-certificate https://raw.githubusercontent.com/jackjieYYY/django-sspanel_script/master/v2ray/sspanel_V2ray.service && chmod +x sspanel_V2ray.service
-    wget -N --no-check-certificate https://github.com/jackjieYYY/django-sspanel_script/blob/master/v2ray/sspanel_Vray.timer && chmod +x sspanel_Vray.timer
-    systemctl daemon-reload
+    wget -N --no-check-certificate https://raw.githubusercontent.com/jackjieYYY/django-sspanel_script/master/v2ray/sspanel_Vray.timer && chmod +x sspanel_Vray.timer
     systemctl enable sspanel_V2ray.service
     systemctl enable sspanel_Vray.timer
+    systemctl daemon-reload
     systemctl start sspanel_V2ray.service
     systemctl start sspanel_Vray.timer
     cd

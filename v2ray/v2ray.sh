@@ -1,6 +1,5 @@
 #!/bin/bash
 parm="$1"
-
 main(){
     if [ -z "$parm" ]; then
             exit 1
@@ -11,7 +10,7 @@ main(){
     elif [ "$parm" = "stop" ] ; then
         Stop
     else
-        echo "????"
+    echo "???" >> /root/v2scar/restartLog.txt
     fi
 }
 
