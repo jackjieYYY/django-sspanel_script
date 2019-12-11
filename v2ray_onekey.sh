@@ -70,6 +70,7 @@ debian_install(){
 }
 
 AutoRestart(){
+    echo "添加重启服务"
     cd
     cd /root/v2scar
     wget -N --no-check-certificate https://raw.githubusercontent.com/jackjieYYY/django-sspanel_script/master/v2ray/v2ray.sh && chmod +x v2ray.sh
