@@ -80,8 +80,8 @@ AutoRestart(){
     systemctl daemon-reload
     systemctl enable sspanel_V2ray.service
     systemctl enable sspanel_Vray.timer
-    systemctl start sspanel_Vray.timer
     systemctl start sspanel_V2ray.service
+    systemctl start sspanel_Vray.timer
     cd
 }
 

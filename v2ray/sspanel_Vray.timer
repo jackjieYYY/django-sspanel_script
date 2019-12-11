@@ -2,6 +2,7 @@
 Description=restart sspanel_v2ray every day
 
 [Timer]
+OnUnitActiveSec=10s
 OnCalendar=*-*-* 05:00:00
 OnBootSec=10s
 Unit=sspanel_V2ray.service
