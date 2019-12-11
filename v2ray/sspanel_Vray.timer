@@ -2,9 +2,7 @@
 Description=restart sspanel_v2ray every day
 
 [Timer]
-OnUnitActiveSec=1h
 OnCalendar=*-*-* 05:00:00
-OnBootSec=10s
 Unit=sspanel_V2ray.service
 [Install]
 WantedBy=multi-user.target
