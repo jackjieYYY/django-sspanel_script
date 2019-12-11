@@ -48,7 +48,11 @@ install(){
     curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
     sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    
+    systemctl enable docker
+    systemctl enable docker.service
     systemctl restart docker
+
     git clone https://github.com/Ehco1996/v2scar.git
     cd v2scar
     sed -i 's/V2SCAR_API_ENDPOINT: \"\"/V2SCAR_API_ENDPOINT: '"$API"'/g' docker-compose.yml
