@@ -49,6 +49,7 @@ install(){
     chmod +x /usr/local/bin/docker-compose
     sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     systemctl enable docker
+    systemctl enable docker.service
     systemctl restart docker
     git clone https://github.com/Ehco1996/v2scar.git
     cd v2scar
