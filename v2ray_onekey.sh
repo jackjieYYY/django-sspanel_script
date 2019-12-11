@@ -53,6 +53,7 @@ install(){
     cd v2scar
     sed -i 's/V2SCAR_API_ENDPOINT: \"\"/V2SCAR_API_ENDPOINT: '"$API"'/g' docker-compose.yml
     docker-compose up -d
+    AutoRestart
     End
 }
 
@@ -66,6 +67,22 @@ debian_install(){
     APIinit
     prepare_Debian
     install
+}
+
+AutoRestart(){
+    cd
+    cd /root/v2scar
+    wget -N --no-check-certificatehttps://raw.githubusercontent.com/jackjieYYY/django-sspanel_script/master/v2ray/v2ray.sh && chmod +x v2ray.sh
+    cd
+    cd /etc/systemd/system
+    wget -N --no-check-certificate https://raw.githubusercontent.com/jackjieYYY/django-sspanel_script/master/v2ray/sspanel_V2ray.service && chmod +x sspanel_V2ray.service
+    wget -N --no-check-certificate https://github.com/jackjieYYY/django-sspanel_script/blob/master/v2ray/sspanel_Vray.timer && chmod +x sspanel_Vray.timer
+    systemctl daemon-reload
+    systemctl enable sspanel_V2ray.service
+    systemctl enable sspanel_Vray.timer
+    systemctl start sspanel_Vray.timer
+    systemctl start sspanel_V2ray.service
+    cd
 }
 
 system_check
