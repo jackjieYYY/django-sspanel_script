@@ -46,8 +46,14 @@ Install(){
     curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
     ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-    git clone https://github.com/Ehco1996/aioshadowsocks.git
-    cd aioshadowsocks
+    curl -sL https://api.github.com/repos/Ehco1996/aioshadowsocks/releases/latest \
+    | jq -r '.zipball_url' \
+    | wget -qi - -O aioshadowsocks.zip
+    unzip aioshadowsocks.zip
+    rm aioshadowsocks.zip
+    sspath="$(find . -type d -name "*aioshadowsocks*")"
+    echo $sspath
+    cd $sspath
     systemctl restart docker
     sed -i 's/SS_API_ENDPOINT: \"\"/SS_API_ENDPOINT: '"$API"'/g' docker-compose.yml
     docker-compose up -d
