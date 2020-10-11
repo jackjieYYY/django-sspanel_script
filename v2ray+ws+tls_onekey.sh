@@ -61,7 +61,7 @@ install(){
     wget -N --no-check-certificate https://raw.githubusercontent.com/jackjieYYY/django-sspanel_script/master/v2ray/web.conf -O /etc/nginx/conf.d/web.conf
     #修改网站地址
     cd /etc/nginx/conf.d
-    sed -i 's/XXX.com/$nodeDomain/g' /etc/nginx/conf.d/web.conf
+    sed -i 's/XXX.com/'$nodeDomain'/g' /etc/nginx/conf.d/web.conf
     nginx -t
     nginx -s reload
     cd
