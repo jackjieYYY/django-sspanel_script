@@ -71,7 +71,7 @@ install(){
     wget -N --no-check-certificate https://raw.githubusercontent.com/jackjieYYY/django-sspanel_script/master/v2ray/v2ray-config.json -O /root/v2scar/v2ray-config.json
 
     # 执行配置，中途会询问你的邮箱，如实填写即可
-    sudo certbot --nginx --non-interactive --agree-tos --domains $nodeDomain --email $mailAddress
+    #sudo certbot --nginx --non-interactive --agree-tos --domains $nodeDomain --email $mailAddress
     # 自动续约
     sudo certbot renew --dry-run
     docker-compose up -d
