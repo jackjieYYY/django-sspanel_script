@@ -2,7 +2,7 @@
 clear
 echo
 echo "#################################################################"
-echo "django-sspanel V2ray ws+tls 一键后端"
+echo "django-sspanel V2ray 一键后端"
 echo
 echo "System Required: CentOS Debian"
 echo "#################################################################"
@@ -20,12 +20,12 @@ system_check(){
 }
 
 APIinit(){
-echo "请输入面板地址(Example:sspanel.com)"
-read Domain
 echo "请输入节点地址(Example:test.sspanel.com)"
-read nodeDomain
+read node
 echo "请输入域名绑定的邮箱(Example:sspanel@gmail.com)"
 read mailAddress
+echo "请输入面板地址(Example:sspanel.com)"
+read Domain
 echo "请输入Token"
 read Token
 echo "请输入节点ID"
@@ -61,7 +61,7 @@ install(){
     wget -N --no-check-certificate https://raw.githubusercontent.com/jackjieYYY/django-sspanel_script/master/v2ray/web.conf -O /etc/nginx/conf.d/web.conf
     #修改网站地址
     cd /etc/nginx/conf.d
-    sed -i 's/XXX.com/'$nodeDomain'/g' /etc/nginx/conf.d/web.conf
+    sed -i 's/XXX.com/'$node'/g' /etc/nginx/conf.d/web.conf
     nginx -t
     nginx -s reload
     cd
