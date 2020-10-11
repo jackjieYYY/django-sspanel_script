@@ -2,7 +2,7 @@
 clear
 echo
 echo "#################################################################"
-echo "django-sspanel V2ray 一键后端"
+echo "django-sspanel V2ray ws+tls 一键后端"
 echo
 echo "System Required: Debian"
 echo "Centos 摸了 下次在匹配"
