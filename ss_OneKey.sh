@@ -31,10 +31,10 @@ APIinit(){
     read A
 }
 prepare_Centos(){
-    yum install -y curl git
+    yum install -y curl git jq
 }
 prepare_Debian(){
-    apt install -y curl git
+    apt install -y curl git jq
 }
 End(){
     echo "安装完毕 请打开防火墙 1000-2000 端口"
